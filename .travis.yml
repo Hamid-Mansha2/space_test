@@ -1,0 +1,23 @@
+arch: arm64-graviton2
+virt: lxd
+os: linux
+dist: focal
+group: edge
+
+services: docker
+
+language: generic
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y python3-pip
+  - pip3 install awscli
+  - sudo apt-get clean
+
+before_script:
+  - df -h
+
+script:
+  - mkdir test_directory
+  - dd if=/dev/zero of=test_directory/testfile bs=1M count=1024
+  - df -h
